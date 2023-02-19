@@ -28,16 +28,19 @@
 --
 -- ─────────────────────────────────────────────────────────────────────────────────────────
 -- ─────────────────────────────────────────────────────────────────────────────────────────
-
 -- Define la ruta de Packer
-local packer_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_path = vim.fn.stdpath('data') ..
+                        '/site/pack/packer/start/packer.nvim'
 
 -- Verifica si Packer ya está instalado y, de lo contrario, lo clona
 local ensure_packer = function()
     local fn = vim.fn
     if fn.empty(fn.glob(packer_path)) > 0 then
-        fn.system({ 'git', 'clone', '--detph', '1', 'https://github.com/wbthomason/packer.nvim', packer_path })
-	vim.cmd [[packadd packer.nvim]]
+        fn.system({
+            'git', 'clone', '--detph', '1',
+            'https://github.com/wbthomason/packer.nvim', packer_path
+        })
+        vim.cmd [[packadd packer.nvim]]
         return true
     end
     return false
@@ -48,12 +51,12 @@ local packer = require('packer')
 -- Inicializa Packer y carga los plugins
 local packer_bootstrap = ensure_packer()
 packer.startup(function(use)
-	use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim'
 
-	-- Sincroniza los plugins si Packer se acaba de instalar
-	if type(packer_bootstrap) == 'boolean' and packer_bootstrap == true then
-		require('packer').sync()
-	end
+    -- Sincroniza los plugins si Packer se acaba de instalar
+    if type(packer_bootstrap) == 'boolean' and packer_bootstrap == true then
+        require('packer').sync()
+    end
 end)
 
 -- Configuraciones de Neovim
@@ -75,4 +78,5 @@ require('themes')
 require('mappings')
 
 -- Servicios de lenguajes
-require('lsp.typescript')
+-- require('lspconfig')
+

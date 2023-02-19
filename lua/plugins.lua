@@ -6,7 +6,7 @@ return packer.startup(function(use)
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
-            'nvim-tree/nvim-web-devicons' -- optional, for files icons
+            'nvim-tree/nvim-web-devicons' -- Opcional, para iconos de archivo
         },
         tag = 'nightly' -- optional, updated every week. 
     }
@@ -58,7 +58,11 @@ return packer.startup(function(use)
         'hrsh7th/nvim-cmp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip', 'L3MON4D3/LuaSnip'
     }
-    use {'nvim-treesitter/nvim-treesitter', 'nvim-treesitter/playground'}
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-treesitter/playground',
+        run = ':TSUpdate'
+    }
     use {
         'akinsho/nvim-bufferline.lua',
         requires = {'kyazdani42/nvim-web-devicons'}
@@ -67,7 +71,10 @@ return packer.startup(function(use)
     use {'nvim-lua/plenary.nvim'}
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+        requires = {
+            {'nvim-lua/popup.nvim'},
+            {'nvim-lua/plenary.nvim'}
+    }
     }
     use {'glepnir/galaxyline.nvim', branch = 'main'}
     use {'norcalli/nvim-colorizer.lua'}
@@ -93,6 +100,16 @@ return packer.startup(function(use)
     use {
         'williamboman/nvim-lsp-installer',
         config = function() require('modules.lsp.servers') end
+    }
+    use { 
+        'glepnir/dashboard-nvim',
+        event = "VimEnter",
+        config = function()
+            require('dashboard').setup {
+
+            }
+        end,
+        requires = {'nvim-tree/nvim-web-devicons'}
     }
 
     -- Instalación de esquema de colores 
